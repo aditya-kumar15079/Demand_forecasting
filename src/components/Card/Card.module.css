@@ -1,0 +1,13 @@
+.card-container {
+  background-color: #f8f8fb;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 120px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  margin: 0;
+  color: gray;
+  font-size: 16px;
+}

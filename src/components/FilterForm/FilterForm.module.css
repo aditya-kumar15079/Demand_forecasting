@@ -1,0 +1,60 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+.select,
+.input,
+.textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputWithIcon .input {
+  padding-right: 30px;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+.resetButton,
+.submitButton {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.resetButton {
+  background-color: white;
+  border: 1px solid #5b3fbb;
+  color: #5b3fbb;
+}
+
+.submitButton {
+  background-color: #5b3fbb;
+  color: white;
+}

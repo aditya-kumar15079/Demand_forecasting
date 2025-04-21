@@ -1,0 +1,56 @@
+.dashboardContainer {
+  display: flex;
+  gap: 16px;
+  font-family: sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+}
+
+.mainContent {
+  flex: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+/* Row 1 - 4 cards of equal width */
+.grid > :nth-child(1),
+.grid > :nth-child(2),
+.grid > :nth-child(3),
+.grid > :nth-child(4) {
+  grid-column: span 3;
+}
+
+/* Row 2 - 3 cards of equal width */
+.grid > :nth-child(5),
+.grid > :nth-child(6),
+.grid > :nth-child(7) {
+  grid-column: span 4;
+}
+
+/* Row 3 - 2 cards, second is double width of the first */
+.grid > :nth-child(8) {
+  grid-column: span 4;
+}
+.grid > :nth-child(9) {
+  grid-column: span 8;
+}
+
+.card {
+  background-color: #f8f8fb;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 120px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card h4 {
+  margin: 0;
+  color: gray;
+  font-size: 16px;
+}
