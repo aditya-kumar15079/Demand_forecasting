@@ -1,8 +1,9 @@
 import "./App.css";
-import DemandForecastDashboard from "./components/DemandForecastDashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
+// import DemandForecastDashboard from "./components/DemandForecastDashboard";
 
 function App() {
-  return <DemandForecastDashboard />;
+  return <Dashboard />;
 }
 
 export default App;

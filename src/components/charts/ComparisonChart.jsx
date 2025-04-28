@@ -10,20 +10,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const SalesChart = () => {
+const ComparisonChart = () => {
   const data = [
-    { name: "M", sales: 200 },
-    { name: "T", sales: 400 },
-    { name: "W", sales: 500 },
-    { name: "T", sales: 450 },
-    { name: "F", sales: 300 },
-    { name: "S", sales: 250 },
-    { name: "S", sales: 200 },
+    { name: "JAN", productA: 300, productB: 200 },
+    { name: "FEB", productA: 500, productB: 400 },
+    { name: "MAR", productA: 700, productB: 600 },
+    { name: "APR", productA: 600, productB: 500 },
+    { name: "MAY", productA: 400, productB: 300 },
+    { name: "JUN", productA: 200, productB: 250 },
   ];
 
   return (
     <div style={{ width: "100%", height: 300 }}>
-      <h2 style={{ textAlign: "center" }}>Forecased Sales</h2>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -36,9 +34,16 @@ const SalesChart = () => {
           <Legend />
           <Line
             type="monotone"
-            dataKey="sales"
+            dataKey="productA"
             stroke="#8884d8"
             fill="#8884d8"
+            fillOpacity={0.3}
+          />
+          <Line
+            type="monotone"
+            dataKey="productB"
+            stroke="#ff6384"
+            fill="#ff6384"
             fillOpacity={0.3}
           />
         </LineChart>
@@ -47,4 +52,4 @@ const SalesChart = () => {
   );
 };
 
-export default SalesChart;
+export default ComparisonChart;

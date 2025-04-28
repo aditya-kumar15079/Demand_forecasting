@@ -1,0 +1,15 @@
+.chartContainer {
+  max-width: 300px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.percentageText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  fill: #4a5568;
+}

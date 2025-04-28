@@ -3,7 +3,11 @@ import React from "react";
 import styles from "./Dashboard.module.css";
 import FilterForm from "../FilterForm/FilterForm";
 import Card from "../Card/Card";
-import SalesChart from "../SalesChart/SalesChart";
+import SalesChart from "../charts/SalesChart";
+import ComparisonChart from "../charts/ComparisonChart";
+import SalesBarChart from "../charts/SalesBarChart";
+import DemandForecastTable from "../table/DemandForecastTable";
+import MarketShareChat from "../charts/MarketShareChart";
 
 const Dashboard = () => {
   return (
@@ -19,7 +23,7 @@ const Dashboard = () => {
       <div className={styles.mainContent}>
         <div className={styles.grid}>
           <Card title="Total Sales">
-            <h1>28,345</h1>
+            <h1>13,61,260</h1>
           </Card>
           <Card title="Total Sales without Promotion">
             <h1>120</h1>
@@ -33,10 +37,18 @@ const Dashboard = () => {
           <Card title="Forecasted Sales">
             <SalesChart />
           </Card>
-          <Card title="Sales Comparison (Product Wise)" />
-          <Card title="Sales Comparison (Channel Wise)" />
-          <Card title="Market Share Distribution" />
-          <Card title="Demand Forecast Table" />
+          <Card title="Sales Comparison (Product Wise)">
+            <ComparisonChart />
+          </Card>
+          <Card title="Sales Comparison (Channel Wise)">
+            <SalesBarChart />
+          </Card>
+          <Card title="Market Share Distribution">
+            <MarketShareChat />
+          </Card>
+          <Card title="Demand Forecast Table">
+            <DemandForecastTable />
+          </Card>
         </div>
       </div>
     </div>
