@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "./FilterForm.module.css";
-import useApi from "../../hooks/useApi";
+import useApi, { METHODS } from "../../hooks/useApi";
 import LoadingModal from "../LoadingModal/LoadingModal";
 import { useDispatch } from "react-redux";
 import { saveForecastData } from "../../reducer/filterslice";
+import Markdown from "react-markdown";
 
 const quantities = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 28, 30];
 const customerNames = ["DOLLAR GE500114290", "DOLLAR GE500114628", "PUBLIX #0500114974", "SUPER TAR500113874", "WALMART #500113707"];
 const customerTypes = ["DSD", "Ecom", "FSV"];
-const frequencies = ["D", "W", "M", "Y"];
+const frequencies = ["D"];
 
 const FilterForm = () => {
   const [filterParams, setFilterParams] = useState({});
@@ -19,10 +20,12 @@ const FilterForm = () => {
   const [horizon, setHorizon] = useState(10);
   const [filterPayload, setFilterPayload] = useState(null);
   const [forecastPayload, setForecastPayload] = useState(null);
+  const [summaryPayload, setSummaryPayload] = useState(null);
   const dispatch = useDispatch();
 
-  const { data: filteredData, loading: loading1 } = useApi("/filter/", "post", filterPayload);
-  const { data: forecastData, loading: loading2 } = useApi("/forecast/", "post", forecastPayload);
+  const { data: filteredData, loading: loading1 } = useApi("/filter/", filterPayload, METHODS.POST);
+  const { data: forecastData, loading: loading2 } = useApi("/forecast/", forecastPayload, METHODS.POST);
+  const { data: summary, loading: loading3 } = useApi("/summarize/", summaryPayload, METHODS.POST);
 
   const getOption = (list) => {
     return list.map((item, index) => {
@@ -35,11 +38,6 @@ const FilterForm = () => {
   };
 
   useEffect(() => {
-    console.log("forecastData", forecastData);
-    dispatch(saveForecastData(forecastData));
-  }, [forecastData]);
-
-  useEffect(() => {
     filteredData &&
       setForecastPayload({
         data: filteredData,
@@ -50,17 +48,27 @@ const FilterForm = () => {
       });
   }, [filteredData]);
 
+  useEffect(() => {
+    console.log("forecastData", forecastData);
+    dispatch(saveForecastData(forecastData));
+  }, [forecastData]);
+
+  useEffect(() => {
+    console.log("summary", summary);
+  }, [summary]);
+
   const submit = () => {
     setFilterPayload({ filters: { CUSTOMER_NAME: "PUBLIX #0500114974", ...filterParams } });
   };
 
   const reset = () => {
     setFilterParams({});
-    // setQuantity(null);
-    // setCustomerName("");
-    // setCustomerType("");
     setFrequency("D");
     setHorizon(10);
+  };
+
+  const retrieveSummary = () => {
+    setSummaryPayload({ filtered_data: filteredData, forecast_data: forecastData });
   };
 
   return (
@@ -103,15 +111,6 @@ const FilterForm = () => {
           {getOption(customerTypes)}
         </select>
 
-        {/* <div className={styles.inputWithIcon}>
-        <input
-          className={styles.input}
-          placeholder="Claender Day"
-          type="text"
-        />
-        <span className={styles.icon}>📅</span>
-      </div> */}
-
         <select className={styles["select-wrapper"]}>
           <option>Region</option>
         </select>
@@ -151,7 +150,13 @@ const FilterForm = () => {
             Submit
           </button>
         </div>
+        {filteredData && forecastData && (
+          <button onClick={retrieveSummary} className={styles.submitButton}>
+            Retrieve Summary
+          </button>
+        )}
       </div>
+      {summary && <Markdown>{summary.summary}</Markdown>}
     </>
   );
 };

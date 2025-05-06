@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../service/api";
 
-const useApi = (url, method = "get", requestData = {}, config = {}) => {
+const useApi = (url, requestData, method, config) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ const useApi = (url, method = "get", requestData = {}, config = {}) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await api[method](url, requestData, config);
+        const response = method === METHODS.POST ? await api.post(url, requestData, config) : await api.get(url, config);
         setData(response);
         return response;
       } catch (err) {
@@ -22,14 +22,17 @@ const useApi = (url, method = "get", requestData = {}, config = {}) => {
         setLoading(false);
       }
     };
-
-    if (method === "post" && !requestData) {
-      return;
-    }
     request();
   }, [requestData]);
 
   return { data, loading, error };
 };
+
+export const METHODS = Object.freeze({
+  GET: Symbol("get"),
+  POST: Symbol("post"),
+  PUT: Symbol("put"),
+  DELETE: Symbol("delete"),
+});
 
 export default useApi;

@@ -11,10 +11,13 @@ export const filterSlice = createSlice({
     saveForecastData: (state, action) => {
       state.value = action.payload;
     },
+    saveForecastSummary: (state, action) => {
+      state.value = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { saveForecastData } = filterSlice.actions;
+export const { saveForecastData, saveForecastSummary } = filterSlice.actions;
 
 export default filterSlice.reducer;
